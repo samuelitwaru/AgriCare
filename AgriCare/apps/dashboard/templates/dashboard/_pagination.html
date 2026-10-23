@@ -1,0 +1,11 @@
+{% if is_paginated %}
+<nav class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?{% if selected_region %}region={{ selected_region }}&{% endif %}{% if selected_zone %}zone={{ selected_zone }}&{% endif %}{% if selected_risk_level %}risk_level={{ selected_risk_level }}&{% endif %}{% if selected_advisory_type %}advisory_type={{ selected_advisory_type }}&{% endif %}page={{ page_obj.previous_page_number }}">&larr; Previous</a>
+    {% endif %}
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+        <a href="?{% if selected_region %}region={{ selected_region }}&{% endif %}{% if selected_zone %}zone={{ selected_zone }}&{% endif %}{% if selected_risk_level %}risk_level={{ selected_risk_level }}&{% endif %}{% if selected_advisory_type %}advisory_type={{ selected_advisory_type }}&{% endif %}page={{ page_obj.next_page_number }}">Next &rarr;</a>
+    {% endif %}
+</nav>
+{% endif %}

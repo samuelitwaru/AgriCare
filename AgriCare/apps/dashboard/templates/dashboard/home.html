@@ -1,0 +1,34 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Overview - AgriCare Dashboard{% endblock %}
+{% block content %}
+<h2>Overview</h2>
+
+<div class="stat-grid">
+    <article class="stat-card"><strong>{{ farm_count }}</strong><span>Registered farms</span></article>
+    <article class="stat-card"><strong>{{ zone_count }}</strong><span>Zones (districts)</span></article>
+    <article class="stat-card"><strong>{{ active_advisory_count }}</strong><span>Active advisories</span></article>
+    <article class="stat-card"><strong class="risk-high">{{ high_risk_count }}</strong><span>High-risk advisories</span></article>
+</div>
+
+<p>{{ recent_outcomes_count }} farm outcome report(s) submitted in the last 30 days.</p>
+
+<h3>Recent advisories</h3>
+<table class="dashboard-table">
+    <thead>
+        <tr><th>Farm</th><th>Type</th><th>Risk</th><th>Source</th><th>Generated</th></tr>
+    </thead>
+    <tbody>
+    {% for a in recent_advisories %}
+        <tr>
+            <td>{{ a.farm.name }}</td>
+            <td>{{ a.advisory_type }}</td>
+            <td class="risk-{{ a.risk_level }}">{{ a.get_risk_level_display }}</td>
+            <td>{{ a.get_source_display }}</td>
+            <td>{{ a.generated_at|date:"Y-m-d H:i" }}</td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="5">No advisories generated yet.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Farmer Reports - AgriCare Dashboard{% endblock %}
+{% block content %}
+<h2>Farmer Reports</h2>
+<p>Yield and pest outcomes submitted by farmers after a season - this is the feedback data that will train future prediction models.</p>
+
+<table class="dashboard-table">
+    <thead>
+        <tr><th>Farm</th><th>Season</th><th>Planted</th><th>Yield (kg/acre)</th><th>Pest incident</th><th>Reported</th></tr>
+    </thead>
+    <tbody>
+    {% for o in outcomes %}
+        <tr>
+            <td>{{ o.farm.name }}</td>
+            <td>{{ o.season }}</td>
+            <td>{{ o.planted_date|default:"—" }}</td>
+            <td>{{ o.yield_kg_per_acre|default:"—" }}</td>
+            <td>{% if o.pest_incident_reported %}<span class="risk-high">Yes</span>{% else %}No{% endif %}</td>
+            <td>{{ o.reported_at|date:"Y-m-d" }}</td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="6">No farmer reports submitted yet.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% include "dashboard/_pagination.html" %}
+{% endblock %}

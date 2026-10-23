@@ -1,0 +1,49 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Advisories - AgriCare Dashboard{% endblock %}
+{% block content %}
+<h2>Advisories</h2>
+
+<form method="get" class="filter-bar grid">
+    <div>
+        <label for="risk_level">Risk level</label>
+        <select name="risk_level" id="risk_level" onchange="this.form.submit()">
+            <option value="">All</option>
+            {% for value, label in risk_levels %}
+                <option value="{{ value }}" {% if value == selected_risk_level %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label for="advisory_type">Type</label>
+        <select name="advisory_type" id="advisory_type" onchange="this.form.submit()">
+            <option value="">All</option>
+            {% for value in advisory_types %}
+                <option value="{{ value }}" {% if value == selected_advisory_type %}selected{% endif %}>{{ value }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</form>
+
+<table class="dashboard-table">
+    <thead>
+        <tr><th>Farm</th><th>Zone</th><th>Type</th><th>Risk</th><th>Source</th><th>Generated</th><th>Valid until</th></tr>
+    </thead>
+    <tbody>
+    {% for a in advisories %}
+        <tr>
+            <td>{{ a.farm.name }}</td>
+            <td>{{ a.farm.zone.name|default:"—" }}</td>
+            <td>{{ a.advisory_type }}</td>
+            <td class="risk-{{ a.risk_level }}">{{ a.get_risk_level_display }}</td>
+            <td>{{ a.get_source_display }}</td>
+            <td>{{ a.generated_at|date:"Y-m-d H:i" }}</td>
+            <td>{{ a.valid_until|date:"Y-m-d H:i"|default:"—" }}</td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="7">No advisories match these filters.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% include "dashboard/_pagination.html" %}
+{% endblock %}

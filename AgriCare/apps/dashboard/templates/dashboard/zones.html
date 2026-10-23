@@ -1,0 +1,37 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Zones - AgriCare Dashboard{% endblock %}
+{% block content %}
+<h2>Zones</h2>
+
+<form method="get" class="filter-bar">
+    <label for="region">Region</label>
+    <select name="region" id="region" onchange="this.form.submit()">
+        <option value="">All regions</option>
+        {% for region in regions %}
+            <option value="{{ region }}" {% if region == selected_region %}selected{% endif %}>{{ region }}</option>
+        {% endfor %}
+    </select>
+</form>
+
+<table class="dashboard-table">
+    <thead>
+        <tr><th>Code</th><th>Name</th><th>Region</th><th>Rainfall (mm)</th><th>NDVI</th><th>As of</th></tr>
+    </thead>
+    <tbody>
+    {% for zone in zones %}
+        <tr>
+            <td>{{ zone.code }}</td>
+            <td>{{ zone.name }}</td>
+            <td>{{ zone.region }}</td>
+            <td>{% if zone.latest_weather.rainfall_mm != None %}{{ zone.latest_weather.rainfall_mm|floatformat:1 }}{% else %}&mdash;{% endif %}</td>
+            <td>{% if zone.latest_weather.ndvi != None %}{{ zone.latest_weather.ndvi|floatformat:2 }}{% else %}&mdash;{% endif %}</td>
+            <td>{{ zone.latest_weather.observed_date|default:"—" }}</td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="6">No zones loaded.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% include "dashboard/_pagination.html" %}
+{% endblock %}

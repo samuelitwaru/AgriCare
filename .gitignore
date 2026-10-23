@@ -1,0 +1,40 @@
+# --- Local tooling ---
+.claude/
+.notebook/
+
+# --- Django backend (AgriCare) ---
+AgriCare/venv/
+AgriCare/__pycache__/
+AgriCare/**/__pycache__/
+AgriCare/*.pyc
+AgriCare/**/*.pyc
+AgriCare/db.sqlite3
+AgriCare/.env
+AgriCare/secrets/
+AgriCare/staticfiles/
+AgriCare/media/
+AgriCare/*.log
+
+# --- Flutter mobile (agricare_mobile) ---
+agricare_mobile/.dart_tool/
+agricare_mobile/.flutter-plugins
+agricare_mobile/.flutter-plugins-dependencies
+agricare_mobile/.pub-cache/
+agricare_mobile/.pub/
+agricare_mobile/build/
+agricare_mobile/coverage/
+agricare_mobile/**/doc/api/
+agricare_mobile/**/ios/Flutter/.last_build_id
+agricare_mobile/app.*.symbols
+agricare_mobile/app.*.map.json
+agricare_mobile/android/app/debug
+agricare_mobile/android/app/profile
+agricare_mobile/android/app/release
+agricare_mobile/*.iml
+agricare_mobile/*.ipr
+agricare_mobile/*.iws
+agricare_mobile/.idea/
+
+# --- General ---
+.DS_Store
+*.log

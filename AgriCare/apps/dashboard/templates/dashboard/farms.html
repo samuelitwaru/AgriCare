@@ -1,0 +1,37 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Farms - AgriCare Dashboard{% endblock %}
+{% block content %}
+<h2>Farms</h2>
+
+<form method="get" class="filter-bar">
+    <label for="zone">Zone</label>
+    <select name="zone" id="zone" onchange="this.form.submit()">
+        <option value="">All zones</option>
+        {% for zone in zones %}
+            <option value="{{ zone.code }}" {% if zone.code == selected_zone %}selected{% endif %}>{{ zone.name }}</option>
+        {% endfor %}
+    </select>
+</form>
+
+<table class="dashboard-table">
+    <thead>
+        <tr><th>Name</th><th>Owner</th><th>Crop</th><th>Zone</th><th>Size (acres)</th><th>Registered</th></tr>
+    </thead>
+    <tbody>
+    {% for farm in farms %}
+        <tr>
+            <td>{{ farm.name }}</td>
+            <td>{{ farm.owner.username }}</td>
+            <td>{{ farm.crop_type }}</td>
+            <td>{{ farm.zone.name|default:"—" }}</td>
+            <td>{{ farm.size_acres|default:"—" }}</td>
+            <td>{{ farm.created_at|date:"Y-m-d" }}</td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="6">No farms registered yet.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% include "dashboard/_pagination.html" %}
+{% endblock %}

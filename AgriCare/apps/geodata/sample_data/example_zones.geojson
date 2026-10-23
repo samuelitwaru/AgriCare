@@ -1,0 +1,32 @@
+{
+  "type": "FeatureCollection",
+  "_note": "PLACEHOLDER DATA FOR PIPELINE TESTING ONLY. These are NOT real Uganda agroecological zone boundaries. Replace with verified boundaries from NARO/MAAIF/FAO before any real ingestion or advisory use.",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "code": "sample-zone-a",
+        "name": "Sample Zone A (placeholder)",
+        "region": "placeholder",
+        "description": "Synthetic test polygon for verifying the load_zones and CHIRPS ingestion pipeline. Not a real zone."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[32.0, 1.0], [32.2, 1.0], [32.2, 1.2], [32.0, 1.2], [32.0, 1.0]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code": "sample-zone-b",
+        "name": "Sample Zone B (placeholder)",
+        "region": "placeholder",
+        "description": "Synthetic test polygon for verifying the load_zones and CHIRPS ingestion pipeline. Not a real zone."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[31.0, 0.3], [31.2, 0.3], [31.2, 0.5], [31.0, 0.5], [31.0, 0.3]]]
+      }
+    }
+  ]
+}

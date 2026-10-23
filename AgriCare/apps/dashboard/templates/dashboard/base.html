@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AgriCare Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.min.css">
+    <style>
+        .risk-high { color: #c0392b; font-weight: 600; }
+        .risk-medium { color: #d68910; font-weight: 600; }
+        .risk-low { color: #1e8449; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .stat-card { text-align: center; }
+        .stat-card strong { font-size: 2.25rem; display: block; line-height: 1.2; }
+        .stat-card span { color: var(--pico-muted-color); font-size: 0.9rem; }
+        table.dashboard-table { font-size: 0.92rem; }
+        .filter-bar { max-width: 320px; margin-bottom: 1rem; }
+        .pagination { display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+<nav class="container-fluid">
+    <ul>
+        <li><strong>AgriCare</strong> <small>&nbsp;Hamitech ACIDA</small></li>
+    </ul>
+    <ul>
+        <li><a href="{% url 'dashboard:home' %}">Overview</a></li>
+        <li><a href="{% url 'dashboard:zones' %}">Zones</a></li>
+        <li><a href="{% url 'dashboard:farms' %}">Farms</a></li>
+        <li><a href="{% url 'dashboard:advisories' %}">Advisories</a></li>
+        <li><a href="{% url 'dashboard:outcomes' %}">Farmer Reports</a></li>
+    </ul>
+    <ul>
+        <li>{{ request.user.username }}</li>
+        <li><a href="{% url 'dashboard:logout' %}">Logout</a></li>
+    </ul>
+</nav>
+<main class="container">
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>
